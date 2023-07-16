@@ -1,0 +1,14 @@
+﻿global using MauiChat;
+global using MauiChat.SeedWork;
+global using MauiChat.Services;
+global using System.Net;
+global using System.Net.Http.Headers;
+global using System.Net.Mime;
+global using System.Text;
+global using System.Text.Json;
+global using SQLite;
+global using MauiChat.Models;
+global using MauiChat.ViewModels;
+global using CommunityToolkit.Mvvm.ComponentModel;
+global using CommunityToolkit.Mvvm.Input;
+global using System.Text.Json.Nodes;

@@ -1,9 +1,9 @@
 namespace MauiChat.Views;
 
 [QueryProperty(nameof(UserId), nameof(UserId))]
-public partial class ChatPage : ContentPage
+public partial class ChatView : ContentPage
 {
-	public ChatPage()
+	public ChatView()
 	{
 		InitializeComponent();
 	}
