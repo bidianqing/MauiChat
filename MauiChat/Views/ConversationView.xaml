@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MauiChat.Views.ConversationView"
-             Title="ConversationPage">
+             Title="消息">
     <!-- Display conversation in a list -->
     <CollectionView x:Name="conversations"
                         ItemsSource="{Binding Conversations}"
@@ -12,16 +12,17 @@
 
         <!-- Designate how the collection of items are laid out -->
         <CollectionView.ItemsLayout>
-            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+            <LinearItemsLayout Orientation="Vertical" />
         </CollectionView.ItemsLayout>
 
         <!-- Define the appearance of each item in the list -->
         <CollectionView.ItemTemplate>
             <DataTemplate>
-                <StackLayout>
-                    <Label Text="{Binding LastMessage}" FontSize="22"/>
-                    <Label Text="{Binding Date}" FontSize="14" TextColor="Silver"/>
-                </StackLayout>
+                <HorizontalStackLayout>
+                    <Label Text="{Binding LastMessage}"/>
+                    <Label Text="{Binding Date}"/>
+                </HorizontalStackLayout>
+               
             </DataTemplate>
         </CollectionView.ItemTemplate>
     </CollectionView>

@@ -46,6 +46,19 @@ public partial class AppShell : Shell
             MessagingCenter.Send<AppShell, string>(this, "Conversation", obj.ToString(Newtonsoft.Json.Formatting.None));
         });
 
+        _connection.On<List<OffLineMessageModel>>("receiveOffLineMessage", (messages) =>
+        {
+            foreach (var message in messages)
+            {
+                var obj = new JObject
+                {
+                    ["fromUserId"] = message.FromUserId.ToString(),
+                    ["message"] = message.Content
+                };
+                MessagingCenter.Send<AppShell, string>(this, "Conversation", obj.ToString(Newtonsoft.Json.Formatting.None));
+            }
+        });
+
         Task.Run(StartHubConnection);
     }
 

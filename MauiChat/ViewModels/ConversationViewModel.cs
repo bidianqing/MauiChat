@@ -1,46 +1,30 @@
-﻿using Newtonsoft.Json.Linq;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-
-namespace MauiChat.ViewModels
+﻿namespace MauiChat.ViewModels
 {
-    public class ConversationViewModel : ObservableObject
+    public partial class ConversationViewModel : ObservableObject
     {
-        private readonly IRepositoryService _repositoryService;
-        public ObservableCollection<Conversation> Conversations { get; }
+        public string UserId { get; set; }
 
-        public ConversationViewModel(IRepositoryService repositoryService)
+        [ObservableProperty]
+        private string _lastMessage;
+
+        [ObservableProperty]
+        private DateTime _date;
+
+        public ConversationViewModel()
         {
-            Conversations = new ObservableCollection<Conversation>();
-            _repositoryService = repositoryService;
+
         }
 
-        public async void ReceiveSingleMessageShowConversation(string message)
+
+        public void Reload()
         {
-            Trace.WriteLine(message);
-            var obj = JObject.Parse(message);
+            RefreshProperties();
+        }
 
-            string fromUserId = obj["fromUserId"].ToString();
-            string lastMessage = obj["message"].ToString();
-
-            var c = Conversations.FirstOrDefault(u => u.UserId == fromUserId);
-            if (c == null)
-            {
-                var entity = new Conversation
-                {
-                    UserId = fromUserId,
-                    LastMessage = lastMessage,
-                    Date = DateTime.Now
-                };
-
-                await _repositoryService.InsertAsync(entity);
-                Conversations.Add(entity);
-            }
-            else
-            {
-                c.LastMessage = lastMessage;
-                c.Date = DateTime.Now;
-            }
+        private void RefreshProperties()
+        {
+            OnPropertyChanged(nameof(LastMessage));
+            OnPropertyChanged(nameof(Date));
         }
     }
 }

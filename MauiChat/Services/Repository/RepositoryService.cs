@@ -36,12 +36,12 @@
             return await connection.DeleteAsync(entity);
         }
 
-        public async Task QueryAsync<T>(string sql) where T : new()
+        public async Task<List<T>> QueryAsync<T>(string sql) where T : new()
         {
             // Call Init()
             await Init();
 
-            await connection.QueryAsync<T>(sql);
+            return await connection.QueryAsync<T>(sql);
         }
 
         public async Task ExecuteAsync(string sql)
